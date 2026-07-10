@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the associated article."
+title: "Late-life depression sex gap — DIF & robustness analysis"
+authors:
+  - family-names: "[FAMILY NAME]"
+    given-names: "[GIVEN NAME]"
+repository-code: "https://github.com/newway515/late-life-depression-sex-gap-DIF"
+license: MIT
+date-released: "2026-07-10"
+preferred-citation:
+  type: article
+  title: "Is the sex gap in late-life depressive symptoms robust to measurement non-invariance? A cross-cohort differential item functioning and decomposition study in CHARLS, HRS, and ELSA"
+  authors:
+    - family-names: "[FAMILY NAME]"
+      given-names: "[GIVEN NAME]"
+  year: 2026
+  journal: "[JOURNAL — e.g. PeerJ]"

@@ -1,0 +1,31 @@
+# ---- Data: never commit participant-level or intermediate data ----
+*.db
+*.sqlite
+*.csv
+*.tsv
+*.rds
+*.RData
+*.sav
+*.dta
+data/
+export/
+output/
+outputs/
+
+# ---- R ----
+.Rhistory
+.Rproj.user/
+.Rapp.history
+
+# ---- Python ----
+__pycache__/
+*.pyc
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

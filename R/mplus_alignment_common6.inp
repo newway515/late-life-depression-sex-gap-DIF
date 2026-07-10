@@ -1,0 +1,23 @@
+! ============================================================
+! Mplus alignment — 三库共同 6 条目, cohort x sex 6 组 (预注册 §6.6)
+! 数据: 由 00_export_from_db.R 产出 pooled_common6_binary.csv,
+!       另存为无表头 pooled_common6.dat, 缺失=-999, 含列 group6(1..6)。
+! 与 03_crosscohort_alignment.R(sirt/mirt) 互证。
+! ============================================================
+TITLE: Cross-cohort alignment, common 6 CESD items (cohort x sex);
+DATA:  FILE = pooled_common6.dat;
+VARIABLE:
+  NAMES = id cohort wave female age depres effort sleepr whappy flone going group6;
+  USEVARIABLES = depres effort sleepr whappy flone going;
+  CATEGORICAL  = depres effort sleepr whappy flone going;
+  CLASSES = c(6);
+  KNOWNCLASS = c(group6 = 1 2 3 4 5 6);
+  MISSING = ALL(-999);
+ANALYSIS:
+  TYPE = MIXTURE;  ESTIMATOR = MLR;  ALIGNMENT = FREE;  PROCESSORS = 4;
+MODEL:
+  %OVERALL%
+  f BY depres effort sleepr whappy flone going;
+OUTPUT: ALIGNMENT TECH8 SVALUES;
+! 读取各组 factor mean: 同 cohort 内 F-M = 性别 DIF 后 Δ_latent;
+! 同性别跨 cohort = 文化/翻译 DIF。alignment 表标出非不变条目。

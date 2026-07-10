@@ -1,0 +1,33 @@
+! ============================================================
+! Mplus MNLFA(moderated nonlinear factor analysis)— CHARLS w4 (预注册 §6.2)
+! 目的: 以 性别(female) + 教育(edu) + 年龄(age) 为调节, 同时估条目载荷(non-uniform DIF)
+!       与阈值(uniform DIF)的调节, 并估性别对因子均值/方差的影响 -> Δ_latent。
+! 数据: charls_w4.csv -> charls_w4.dat (无表头, 缺失=-999)。
+! 与 01_charls_dif_gap.R (R:mnlfa/mirt) 互证。此为单调节示例, 可用 aMNLFA 自动展开多条目。
+! CHARLS 条目为 0-3 有序; 抑郁方向 *_d。
+! ============================================================
+TITLE: MNLFA CHARLS w4 - sex/education/age moderation;
+DATA:  FILE = charls_w4.dat;
+VARIABLE:
+  NAMES = id wave female edu_low raeducl age
+          depres effort sleepr whappy flone going bother mindts fhope fear;
+  USEVARIABLES = depres effort sleepr whappy flone going bother mindts fhope fear
+                 female raeducl age;
+  CATEGORICAL  = depres effort sleepr whappy flone going bother mindts fhope fear;
+  CONSTRAINT   = female raeducl age;
+  MISSING = ALL(-999);
+ANALYSIS: ESTIMATOR = MLR; ALGORITHM = INTEGRATION; PROCESSORS = 4;
+MODEL:
+  eta BY depres* effort sleepr whappy flone going bother mindts fhope fear;
+  eta@1;
+  ! 因子均值随协变量(影响=impact, 即校正后差距来源):
+  eta ON female raeducl age;
+  ! ---- 条目阈值的 uniform DIF(示例: sleepr, fear —— H1 定向)：----
+  ! 用 MODEL CONSTRAINT + 参数标签实现阈值随 female 变化; 逐条目展开。
+  ! [sleepr$1] (t1); 之后 MODEL CONSTRAINT: t1 = b0 + b1*female;  (Mplus 需按条目逐一写)
+MODEL CONSTRAINT:
+  ! 在此写各条目 载荷/阈值 = 截距 + 斜率*调节 的线性预测(逐条目)。
+  ! 正则化筛选建议用 R 包 mnlfa(LASSO-DIF) 或 aMNLFA 自动生成完整语法。
+OUTPUT: STANDARDIZED TECH1 TECH8;
+! 注: 完整 MNLFA 语法条目众多, 推荐用 aMNLFA::aMNLFA() 依据本模板自动生成、
+!     并做正则化 DIF 筛选(对应预注册 §6.2 的"正则化筛选")。
