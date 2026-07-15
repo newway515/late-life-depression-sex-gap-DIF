@@ -1,5 +1,5 @@
 # =====================================================================
-# 06_dd_bootstrap.R  —  Reviewer point (Major #4):
+# 06_dd_bootstrap.R — joint bootstrap for the decomposition components.
 #   Are ΔΔ_meas (=Δ_raw−Δ_latent) and ΔΔ_struct (=Δ_latent−Δ_adj)
 #   individually different from 0, and different from EACH OTHER?
 #   -> joint bootstrap of Δ_raw / Δ_latent / Δ_adj with the anchor set

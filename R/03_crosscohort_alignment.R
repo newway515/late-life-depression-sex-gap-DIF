@@ -1,6 +1,6 @@
 # =====================================================================
 # 03_crosscohort_alignment.R — 三库共同 6 条目 alignment(cohort x sex)
-# 预注册 §6.6。二分 2PL;6 组 = CHARLS/ELSA/HRS x F/M;
+# Binary 2PL model; six groups = CHARLS/ELSA/HRS x female/male;
 # 输出各组潜均值 -> 分离(同 cohort 内 F-M = 性别 DIF 后差) 与(同性别跨 cohort = 文化 DIF);
 # 对照 Δ_raw 梯度 China>England>US。sirt::invariance.alignment 与 mirt 互证。
 # =====================================================================
@@ -31,7 +31,7 @@ tab <- data.frame(grp=names(am), aligned_mean=as.numeric(am)) %>%
 sex_gap <- tab %>% group_by(cohort) %>%
   summarise(delta_latent_FM = aligned_mean[sex=="F"] - aligned_mean[sex=="M"])
 cat("\n== 各 cohort alignment 后 Δ_latent(F-M) ==\n"); print(sex_gap)
-cat("对照 Δ_raw 梯度: CHARLS 0.35 > ELSA 0.28 > HRS 0.22 (Phase-A)\n")
+cat("Reference raw-gap gradient: CHARLS 0.35 > ELSA 0.28 > HRS 0.22\n")
 
 ## D) 条目层面: 哪些条目非不变归因于 sex, 哪些归因于 cohort(文化/翻译)
 cat("\n== alignment R2(越高=越不变) 与非不变条目见 al$itempars / al$es ==\n")

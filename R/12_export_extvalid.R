@@ -1,12 +1,12 @@
 # =====================================================================
-# 12_export_extvalid.R  —  Reviewer-2 point #5 (Option 2: pooled + cluster-robust).
+# 12_export_extvalid.R — export inputs for pooled person-clustered models.
 #   The external-validity files are person-wave POOLED (age>=60, all waves):
 #     HRS-CIDI  169k rows / 31,572 persons; ELSA-grip 59k rows / 14,161 persons.
 #   This script ONLY refits the corrected latent score and exports, per row,
 #   the person id + wave + sex + age + raw score + corrected score + outcome,
 #   so the cluster-robust (clustered on person) regressions can be done in Python.
 #   CHARLS grip (single wave w3) needs no clustering and is unchanged.
-# Run in phaseB_scripts/.  Packages: mirt, dplyr.  Runtime: ~2-4 min.
+# Run from the repository root. Packages: mirt, dplyr. Runtime: ~2-4 min.
 # =====================================================================
 suppressMessages({library(mirt); library(dplyr)})
 set.seed(20260709); dir.create("export", showWarnings = FALSE)
@@ -53,4 +53,4 @@ write.csv(data.frame(id=e$idauniq, wave=e$wave, female=e$female, agey=e$agey,
           "export/export_elsa_grip.csv", row.names=FALSE)
 
 cat("\nWrote export/export_hrs_cidi.csv and export/export_elsa_grip.csv.\n")
-cat("Send me those two; I will run cluster-robust (person-clustered) logistic/OLS in Python.\n")
+cat("Run python/clustered_external_validity.py to fit the person-clustered models.\n")

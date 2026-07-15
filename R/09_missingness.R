@@ -1,5 +1,5 @@
 # =====================================================================
-# 09_missingness.R  —  Reviewer point (Stat #5):
+# 09_missingness.R — missingness diagnostics and MI sensitivity.
 #   (a) Describe item-missingness in the ELIGIBLE CHARLS w4 sample
 #       (age >= 60, valid sex) BEFORE complete-case filtering.
 #   (b) Test whether "any item missing" is related to sex / education /
@@ -14,10 +14,10 @@
 #   If you do not yet have this file, create it once from the analysis DB,
 #   e.g. (edit table/column names to match your DB):
 #     library(DBI); library(RSQLite)
-#     con <- dbConnect(SQLite(), "D:/clinicdatabase/SQLitedatabase/cesd_analysis.db")
+#     con <- dbConnect(SQLite(), Sys.getenv("CESD_DB"))
 #     raw <- dbGetQuery(con, "SELECT * FROM charls_cesd_items_long WHERE wave=4")
 #     # keep age>=60 & valid sex; map item columns to depres_d..fear_d (0-3, NA kept)
-#     write.csv(raw_mapped, "phaseB_scripts/data/charls_w4_raw.csv", row.names=FALSE)
+#     write.csv(raw_mapped, "data/charls_w4_raw.csv", row.names=FALSE)
 # =====================================================================
 suppressMessages({library(dplyr)})
 ITEMS <- c("depres","effort","sleepr","whappy","flone","going","bother","mindts","fhope","fear")

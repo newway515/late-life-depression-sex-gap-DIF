@@ -1,5 +1,5 @@
 # =====================================================================
-# 10_grip_multicov.R  —  Reviewer point (Clinical #2):
+# 10_grip_multicov.R — handgrip models with available additional covariates.
 #   The grip-strength external-validity model adjusted only for age.
 #   Re-fit the depression-score x sex interaction on grip with ADDITIONAL
 #   covariates (whatever is available: BMI, physical activity, chronic-

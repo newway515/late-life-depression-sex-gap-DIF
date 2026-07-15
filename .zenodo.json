@@ -1,0 +1,43 @@
+{
+  "creators": [
+    {
+      "name": "Liu, Wei",
+      "orcid": "0009-0006-5726-8720",
+      "affiliation": "Department of Neurology, Tongren People's Hospital, Tongren, Guizhou, China"
+    },
+    {
+      "name": "Cui, Lili",
+      "affiliation": "Department of Neurology, Tongren People's Hospital, Tongren, Guizhou, China"
+    },
+    {
+      "name": "Fu, Yunpeng",
+      "affiliation": "Department of Neurology, Tongren People's Hospital, Tongren, Guizhou, China"
+    },
+    {
+      "name": "Li, Xiaomei",
+      "affiliation": "Department of Geriatrics, Tongren People's Hospital, Tongren, Guizhou, China"
+    },
+    {
+      "name": "Yu, Yinghong",
+      "affiliation": "Department of Geriatrics, Tongren People's Hospital, Tongren, Guizhou, China"
+    }
+  ],
+  "title": "Late-life depression sex gap: DIF and robustness analysis",
+  "description": "Versioned R and Python analysis code for a cross-cohort study of sex differences, differential item functioning, measurement invariance, and robustness of late-life depressive symptoms in CHARLS, HRS, and ELSA. Participant-level cohort data are not included because they are distributed by third-party providers under their respective access terms.",
+  "version": "1.0.0",
+  "publication_date": "2026-07-15",
+  "access_right": "open",
+  "upload_type": "software",
+  "license": "mit",
+  "language": "eng",
+  "keywords": [
+    "depression",
+    "differential item functioning",
+    "measurement invariance",
+    "item response theory",
+    "older adults",
+    "CHARLS",
+    "HRS",
+    "ELSA"
+  ]
+}

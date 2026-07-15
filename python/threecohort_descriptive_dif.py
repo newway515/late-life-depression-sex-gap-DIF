@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
-"""三库(CHARLS/ELSA/HRS)描述统计 Table 1 + Δ_raw(bootstrap CI) + 非参数性别 DIF(MH ETS Δ)。
-主分析波: 各库 >=60 岁完整个案最多之波。沙箱 numpy/pandas 可发表层结果。
-"""
-import sqlite3, math, numpy as np, pandas as pd
+"""Three-cohort descriptives, bootstrap raw gaps, and nonparametric sex DIF."""
+import argparse, os, sqlite3, math, numpy as np, pandas as pd
+from pathlib import Path
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 rng=np.random.default_rng(20260709)
-DB="/sessions/keen-magical-pasteur/mnt/SQLitedatabase/cesd_analysis.db"; OUT="/sessions/keen-magical-pasteur/mnt/ccProj01"
+
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--db", default=os.getenv("CESD_DB"), help="SQLite input database (or set CESD_DB)")
+parser.add_argument("--out", default=os.getenv("CESD_OUT", "output"), help="Output directory")
+args=parser.parse_args()
+if not args.db: parser.error("Provide --db or set CESD_DB")
+DB=Path(args.db); OUT=Path(args.out)
+if not DB.is_file(): parser.error(f"Database not found: {DB}")
+OUT.mkdir(parents=True, exist_ok=True)
 
 SPECS={
  "CHARLS":("charls_cesd_items_long","ID",
@@ -36,7 +43,7 @@ def mh_delta(item_bin,focal,score,k=10):
     return delta, math.erfc(math.sqrt(chi2/2))
 def ets(d): ad=abs(d); return "A" if ad<1 else ("B" if ad<1.5 else "C")
 
-con=sqlite3.connect(DB)
+con=sqlite3.connect(str(DB))
 table1=[]; difrows=[]; common_delta={}
 for coh,(tab,idc,items,educ) in SPECS.items():
     d=pd.read_sql(f"SELECT * FROM {tab}",con)

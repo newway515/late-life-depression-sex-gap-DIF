@@ -1,28 +1,38 @@
 cff-version: 1.2.0
-message: "If you use this code, please cite the associated article."
-title: "Late-life depression sex gap — DIF & robustness analysis"
-# Wei Liu and Lili Cui contributed equally (co-first authors).
-# Wei Liu is the corresponding author.
+message: "If you use this software, please cite the archived software release and the associated article."
+type: software
+title: "Late-life depression sex gap: DIF and robustness analysis"
+abstract: "R and Python code for a cross-cohort analysis of sex differences, differential item functioning, measurement invariance, and robustness of late-life depressive symptoms in CHARLS, HRS, and ELSA."
+version: 1.0.0
+date-released: "2026-07-15"
 authors:
   - family-names: "Liu"
     given-names: "Wei"
-    affiliation: "[Affiliation 1]"
-    # email: "corresponding-author-email@example.com"
+    orcid: "https://orcid.org/0009-0006-5726-8720"
+    affiliation: "Department of Neurology, Tongren People's Hospital, Tongren, Guizhou, China"
   - family-names: "Cui"
     given-names: "Lili"
-    affiliation: "[Affiliation 1]"
+    affiliation: "Department of Neurology, Tongren People's Hospital, Tongren, Guizhou, China"
   - family-names: "Fu"
     given-names: "Yunpeng"
-    affiliation: "[Affiliation 1]"
+    affiliation: "Department of Neurology, Tongren People's Hospital, Tongren, Guizhou, China"
   - family-names: "Li"
     given-names: "Xiaomei"
-    affiliation: "[Affiliation 2]"
+    affiliation: "Department of Geriatrics, Tongren People's Hospital, Tongren, Guizhou, China"
   - family-names: "Yu"
     given-names: "Yinghong"
-    affiliation: "[Affiliation 2]"
+    affiliation: "Department of Geriatrics, Tongren People's Hospital, Tongren, Guizhou, China"
 repository-code: "https://github.com/newway515/late-life-depression-sex-gap-DIF"
 license: MIT
-date-released: "2026-07-10"
+keywords:
+  - depression
+  - differential item functioning
+  - measurement invariance
+  - item response theory
+  - older adults
+  - CHARLS
+  - HRS
+  - ELSA
 preferred-citation:
   type: article
   title: "Is the sex gap in late-life depressive symptoms robust to measurement non-invariance? A cross-cohort differential item functioning and decomposition study in CHARLS, HRS, and ELSA"

@@ -1,5 +1,5 @@
 # =====================================================================
-# 07_essd_threshold_sensitivity.R  —  Reviewer point (Stat #1):
+# 07_essd_threshold_sensitivity.R — ESSD threshold sensitivity.
 #   Is Δ_latent sensitive to the ESSD effect-size threshold used to
 #   define "substantive" DIF? Re-derive the flagged set and Δ_latent at
 #   ESSD >= 0.15 / 0.20 (main) / 0.25, holding adj p < 0.01.

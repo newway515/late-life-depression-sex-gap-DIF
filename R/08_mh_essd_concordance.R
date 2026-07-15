@@ -1,5 +1,5 @@
 # =====================================================================
-# 08_mh_essd_concordance.R  —  Reviewer point (Stat #2):
+# 08_mh_essd_concordance.R — concordance of MH and IRT-ESSD screens.
 #   Agreement between the nonparametric MH (ETS A/B/C) screen and the
 #   IRT ESSD effect-size gate. Produces a per-item table + 2x2 crosstab
 #   (MH class B/C vs ESSD >= 0.20) + Cohen's kappa + Spearman correlation
@@ -11,10 +11,11 @@ ITEMS <- c("depres","effort","sleepr","whappy","flone","going","bother","mindts"
 prev <- readRDS("output/out_charls_w4_dif_gap.rds")
 ess  <- prev$essd
 
-# MH ETS delta / class: from the Phase-A screen file. Try common locations.
-paths <- c("../charls_dif_screen_w4.csv", "./data/charls_dif_screen_w4.csv", "charls_dif_screen_w4.csv")
+# MH ETS delta/class from the exploratory screen file. Try common locations.
+paths <- c("./output/charls_dif_screen_w4.csv", "./data/charls_dif_screen_w4.csv",
+           "charls_dif_screen_w4.csv", "../charls_dif_screen_w4.csv")
 scrp  <- paths[file.exists(paths)][1]
-if(is.na(scrp)) stop("Cannot find charls_dif_screen_w4.csv (columns: item, sex_ETSdelta, sex_class). Put it beside the script or in ./data/.")
+if(is.na(scrp)) stop("Cannot find charls_dif_screen_w4.csv. Run python/charls_analysis_phaseA.py first.")
 scr <- read.csv(scrp)
 
 tab <- data.frame(

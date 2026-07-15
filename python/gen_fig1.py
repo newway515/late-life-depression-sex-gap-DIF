@@ -1,3 +1,5 @@
+import argparse
+from pathlib import Path
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
@@ -48,4 +50,7 @@ box(50,8.5,86,10,"Conclusion",
     "The female–male late-life depression gap is real and robust to measurement non-invariance,\nwith limited measurement amplification in somatic, fear, and loneliness items.",
     fc="#F3ECF7",ec="#5B3A82",tsz=10.5,bsz=8.2)
 
-plt.savefig("img/Figure1_study_flow.png",dpi=170,bbox_inches="tight"); print("saved fig1")
+parser=argparse.ArgumentParser(description="Generate the study-flow figure")
+parser.add_argument("--output",type=Path,default=Path("figures/Figure1_study_flow.png"))
+args=parser.parse_args(); args.output.parent.mkdir(parents=True,exist_ok=True)
+plt.savefig(args.output,dpi=170,bbox_inches="tight"); print(f"saved {args.output}")

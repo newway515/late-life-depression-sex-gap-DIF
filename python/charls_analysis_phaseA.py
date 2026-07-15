@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""CHARLS Phase-A analysis (sandbox: numpy/pandas only, no scipy/R/Mplus).
+"""Exploratory CHARLS descriptives and nonparametric DIF screen.
 - pick main wave (age>=60, complete 10 items)
 - descriptives + sex x education collinearity
 - non-parametric DIF screen: polytomous stratified SMD + dichotomized Mantel-Haenszel (ETS delta)
@@ -7,16 +7,23 @@
 - raw gap (Cohen d) and 'DIF-purified' gap (drop flagged items) as first-pass Delta_latent direction
 Outputs: CSVs + figures + printed summary.
 """
-import sqlite3, math, numpy as np, pandas as pd
+import argparse, os, sqlite3, math, numpy as np, pandas as pd
+from pathlib import Path
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 
-DB="/tmp/charls.db"
-OUT="/sessions/keen-magical-pasteur/mnt/ccProj01"
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--db", default=os.getenv("CESD_DB"), help="SQLite input database (or set CESD_DB)")
+parser.add_argument("--out", default=os.getenv("CESD_OUT", "output"), help="Output directory")
+args=parser.parse_args()
+if not args.db: parser.error("Provide --db or set CESD_DB")
+DB=Path(args.db); OUT=Path(args.out)
+if not DB.is_file(): parser.error(f"Database not found: {DB}")
+OUT.mkdir(parents=True, exist_ok=True)
 ITEMS=["depres","effort","sleepr","whappy","flone","going","bother","mindts","fhope","fear"]
 COMMON6=["depres","effort","sleepr","whappy","flone","going"]
 D=[i+"_d" for i in ITEMS]
 
-con=sqlite3.connect(DB)
+con=sqlite3.connect(str(DB))
 df=pd.read_sql("SELECT * FROM charls_cesd_items_long", con); con.close()
 
 # ---- pick main wave: age>=60 & all 10 items & gender & education ----

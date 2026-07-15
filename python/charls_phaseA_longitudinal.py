@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
-"""CHARLS longitudinal Phase-A: non-parametric sex-DIF + gap across waves 1-4.
+"""Exploratory longitudinal CHARLS nonparametric sex-DIF and gap analysis.
 Checks stability of (a) Delta_raw, (b) which items show substantial sex DIF (ETS B/C),
 (c) DIF-purified gap. Data: cesd_analysis.db / charls_cesd_items_long.
-Sandbox: numpy/pandas only.
 """
-import sqlite3, math, numpy as np, pandas as pd
+import argparse, os, sqlite3, math, numpy as np, pandas as pd
+from pathlib import Path
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 
-DB="/tmp/cesd_analysis.db"
-OUT="/sessions/keen-magical-pasteur/mnt/ccProj01"
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--db", default=os.getenv("CESD_DB"), help="SQLite input database (or set CESD_DB)")
+parser.add_argument("--out", default=os.getenv("CESD_OUT", "output"), help="Output directory")
+args=parser.parse_args()
+if not args.db: parser.error("Provide --db or set CESD_DB")
+DB=Path(args.db); OUT=Path(args.out)
+if not DB.is_file(): parser.error(f"Database not found: {DB}")
+OUT.mkdir(parents=True, exist_ok=True)
 ITEMS=["depres","effort","sleepr","whappy","flone","going","bother","mindts","fhope","fear"]
 D=[i+"_d" for i in ITEMS]
 
-con=sqlite3.connect(DB); df=pd.read_sql("SELECT * FROM charls_cesd_items_long",con); con.close()
+con=sqlite3.connect(str(DB)); df=pd.read_sql("SELECT * FROM charls_cesd_items_long",con); con.close()
 df["ragender"]=pd.to_numeric(df.ragender,errors="coerce")
 df["raeducl"]=pd.to_numeric(df.raeducl,errors="coerce")
 for c in D+["cesd","agey"]: df[c]=pd.to_numeric(df[c],errors="coerce")
@@ -66,7 +72,7 @@ for w in waves:
                      flagged=";".join(flagged) or "none",sleepr_delta=round(deltas["sleepr"],3)))
 S=pd.DataFrame(summ)
 pd.set_option("display.width",200)
-print("=== CHARLS longitudinal Phase-A (age>=60) ===")
+print("=== CHARLS longitudinal analysis (age>=60) ===")
 print(S.to_string(index=False))
 print("\n=== sex ETS delta per item across waves (|>1|=B substantial) ===")
 DM=pd.DataFrame(delmat).round(2); DM.index.name="item"; DM.columns=[f"w{w}" for w in waves]

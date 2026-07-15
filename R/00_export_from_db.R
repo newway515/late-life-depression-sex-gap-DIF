@@ -1,10 +1,11 @@
 # =====================================================================
-# 00_export_from_db.R  —  从 cesd_analysis.db 导出 Phase-B 分析用数据集
-# 与预注册 §3–§4 对齐。仅做整形,不含任何 DIF/差距估计,可在冻结前运行。
+# 00_export_from_db.R — export analysis-ready files from the local SQLite inputs.
 # =====================================================================
 suppressMessages({library(DBI); library(RSQLite); library(dplyr)})
 
-DB   <- Sys.getenv("CESD_DB", "D:/clinicdatabase/SQLitedatabase/cesd_analysis.db")
+DB   <- Sys.getenv("CESD_DB")
+if (!nzchar(DB)) stop("Set CESD_DB to the local SQLite input database.")
+if (!file.exists(DB)) stop("CESD_DB does not exist: ", DB)
 OUT  <- Sys.getenv("CESD_OUT", "./data")
 dir.create(OUT, showWarnings = FALSE, recursive = TRUE)
 con  <- dbConnect(SQLite(), DB)

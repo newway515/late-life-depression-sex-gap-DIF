@@ -1,5 +1,5 @@
 ! ============================================================
-! Mplus alignment — 三库共同 6 条目, cohort x sex 6 组 (预注册 §6.6)
+! Mplus alignment — six common items, cohort x sex (six groups)
 ! 数据: 由 00_export_from_db.R 产出 pooled_common6_binary.csv,
 !       另存为无表头 pooled_common6.dat, 缺失=-999, 含列 group6(1..6)。
 ! 与 03_crosscohort_alignment.R(sirt/mirt) 互证。

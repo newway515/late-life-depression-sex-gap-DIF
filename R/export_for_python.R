@@ -1,8 +1,6 @@
 # =====================================================================
-# export_for_python.R  —  THE ONLY R SCRIPT YOU NEED TO RUN for Batch 2.
-# It ONLY fits the IRT models and writes intermediate CSVs into ./export/.
-# All downstream statistics, tables, and figures are then done in Python.
-# Run from inside phaseB_scripts/ (so ./data and ./output resolve).
+# export_for_python.R — fit IRT models and write intermediates to ./export/.
+# Run from the repository root so ./data and ./output resolve.
 # Packages: mirt, boot, dplyr.  Runtime: ~15-25 min (the bootstrap block).
 #
 # Produces in ./export/ :
@@ -52,7 +50,8 @@ corrected_fscore <- function(X, female, itemtype){
 
 ## ---- C) per-item DIF + ESSD + MH class (fast) ----
 tryCatch({
-  mhp <- c("../charls_dif_screen_w4.csv","./data/charls_dif_screen_w4.csv","charls_dif_screen_w4.csv")
+  mhp <- c("./output/charls_dif_screen_w4.csv","./data/charls_dif_screen_w4.csv",
+           "charls_dif_screen_w4.csv","../charls_dif_screen_w4.csv")
   mhp <- mhp[file.exists(mhp)][1]
   it <- data.frame(item=ITEMS,
                    X2=prev$dif$X2[match(ITEMS,prev$dif$item)],
@@ -141,4 +140,4 @@ tryCatch({
   write.csv(D,"export/export_dd_draws.csv",row.names=FALSE); ok("export_dd_draws.csv")
 }, error=function(e) cat("[skip] dd_draws:",conditionMessage(e),"\n"))
 
-cat("\nAll exports attempted. Send me everything in the ./export/ folder.\n")
+cat("\nAll requested exports were attempted; inspect the ./export/ folder.\n")

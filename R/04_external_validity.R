@@ -1,5 +1,5 @@
 # =====================================================================
-# 04_external_validity.R — 外部效度确证检验(预注册 §6.7)  [mirt-only 稳健版 v2]
+# 04_external_validity.R — external-validity analyses (mirt implementation).
 # (A) HRS-CIDI: 原始 CES-D 分 vs DIF 校正潜分 对 cidi_mde3 的预测;
 #     主检验 = 分数×性别交互是否因校正而"减弱"(减弱=条目含测量偏倚)。
 # (B) 三库握力: grip_max ~ 抑郁分(原始 vs 校正) × 性别 + 年龄。

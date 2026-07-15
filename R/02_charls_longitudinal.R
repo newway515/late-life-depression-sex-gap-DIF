@@ -1,6 +1,6 @@
 # =====================================================================
 # 02_charls_longitudinal.R — CHARLS w1-w4 纵向不变性 + Δ_latent 轨迹
-# 预注册 §6.5。逐波估 Δ_latent(部分不变性,锚沿用 01 的 anchor);
+# Estimate wave-specific Delta_latent using the partial-invariance anchors from script 01;
 # 检验跨波(配置/度量/标量)不变性;报告 Δ_latent 轨迹与稳定性。
 # =====================================================================
 suppressMessages({library(mirt); library(dplyr)})

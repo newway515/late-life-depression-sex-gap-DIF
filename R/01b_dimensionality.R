@@ -11,7 +11,7 @@
 suppressMessages({library(mirt); library(dplyr)})
 set.seed(20260709); dir.create("output", showWarnings = FALSE)
 ITEMS <- c("depres","effort","sleepr","whappy","flone","going","bother","mindts","fhope","fear")
-SOMA  <- c("effort","sleepr","going")          # 躯体/迟滞特异因子(预注册固定)
+SOMA  <- c("effort","sleepr","going")          # prespecified somatic/retardation factor
 
 d <- read.csv("./data/charls_w4.csv")
 X <- d[, paste0(ITEMS,"_d")]; colnames(X) <- ITEMS

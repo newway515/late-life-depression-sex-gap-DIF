@@ -1,3 +1,5 @@
+import argparse
+from pathlib import Path
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt, numpy as np
 settings=["Full-invariance baseline","Wave 3 (2015)","Main (data-driven anchors)",
@@ -14,4 +16,7 @@ ax.axvline(0.319,ls="--",lw=.8,color="#444"); ax.text(0.319,len(vals)-0.4,"  mai
 ax.set_yticks(range(len(settings))); ax.set_yticklabels(settings,fontsize=9)
 ax.set_xlim(0,0.42); ax.set_xlabel("Latent-mean sex gap, female − male (d units)")
 ax.set_title("Robustness of the female–male depression gap across analytic settings\n(CHARLS; all directions positive, cross-setting range = 0.081 ≤ 0.10)",fontsize=10)
-plt.tight_layout(); plt.savefig("img/sensitivity_matrix_en.png",dpi=150); print("saved")
+parser=argparse.ArgumentParser(description="Generate the sensitivity-matrix figure")
+parser.add_argument("--output",type=Path,default=Path("figures/Figure5_sensitivity_matrix.png"))
+args=parser.parse_args(); args.output.parent.mkdir(parents=True,exist_ok=True)
+plt.tight_layout(); plt.savefig(args.output,dpi=150); print(f"saved {args.output}")

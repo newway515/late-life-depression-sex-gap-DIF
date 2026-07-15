@@ -1,5 +1,5 @@
 # =====================================================================
-# 11_missingness.R  —  Reviewer point (Stat #5), self-contained.
+# 11_missingness.R — self-contained missingness and MI sensitivity analysis.
 #   Rebuilds the ELIGIBLE CHARLS w4 sample (age>=60, valid sex) WITH
 #   missing CES-D items retained (mirrors 00_export_from_db.R filters,
 #   minus the complete-item requirement), then:
@@ -8,10 +8,12 @@
 #     (c) compares complete-case vs multiple-imputation Delta_latent.
 #   Also writes CSVs into ./export/ so the figure/table are done in Python.
 #
-# Run in phaseB_scripts/.  Packages: DBI, RSQLite, dplyr, mirt (+ mice for MI).
+# Run from the repository root. Packages: DBI, RSQLite, dplyr, mirt (+ mice for MI).
 # =====================================================================
 suppressMessages({library(DBI); library(RSQLite); library(dplyr); library(mirt)})
-DB <- Sys.getenv("CESD_DB", "D:/clinicdatabase/SQLitedatabase/cesd_analysis.db")
+DB <- Sys.getenv("CESD_DB")
+if (!nzchar(DB)) stop("Set CESD_DB to the local SQLite input database.")
+if (!file.exists(DB)) stop("CESD_DB does not exist: ", DB)
 dir.create("export", showWarnings = FALSE)
 ITEMS <- c("depres","effort","sleepr","whappy","flone","going","bother","mindts","fhope","fear")
 ID <- paste0(ITEMS,"_d")
@@ -76,4 +78,4 @@ if(requireNamespace("mice", quietly=TRUE)){
 }
 write.csv(out, "export/export_missingness_delta.csv", row.names=FALSE)
 cat("\nWrote export/export_missingness_rows.csv and export/export_missingness_delta.csv\n")
-cat("Send me those two CSVs; I will make Table S19 + the missingness figure in Python.\n")
+cat("Wrote the missingness summary files used for Table S19 and its figure.\n")

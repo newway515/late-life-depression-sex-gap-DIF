@@ -1,5 +1,5 @@
 # =====================================================================
-# 13_sensitivity_extra.R  —  Reviewer-2 (round 2) points #2 and #3.
+# 13_sensitivity_extra.R — contemporary-wave and bifactor sensitivities.
 #   (#2) Contemporary-HRS-wave sensitivity: recompute the cross-cohort
 #        gradient using a recent HRS wave (2016 and 2018) instead of the
 #        most-complete wave (1998), to show China-largest / all-positive
@@ -8,11 +8,13 @@
 #        latent sex gap scoring the general factor of a bifactor model,
 #        to show Delta_latent stays ~0.32 (the positive-affect method
 #        factor does not absorb the sex DIF).
-# Run in phaseB_scripts/.  Packages: DBI, RSQLite, dplyr, mirt.  ~3-6 min.
+# Run from the repository root. Packages: DBI, RSQLite, dplyr, mirt. ~3-6 min.
 # =====================================================================
 suppressMessages({library(DBI); library(RSQLite); library(dplyr); library(mirt)})
 set.seed(20260709); dir.create("export", showWarnings = FALSE)
-DB <- Sys.getenv("CESD_DB", "D:/clinicdatabase/SQLitedatabase/cesd_analysis.db")
+DB <- Sys.getenv("CESD_DB")
+if (!nzchar(DB)) stop("Set CESD_DB to the local SQLite input database.")
+if (!file.exists(DB)) stop("CESD_DB does not exist: ", DB)
 COMMON6 <- c("depres","effort","sleepr","whappy","flone","going")
 ITEMS   <- c("depres","effort","sleepr","whappy","flone","going","bother","mindts","fhope","fear")
 
@@ -64,4 +66,4 @@ if(!is.null(bf)){
                        gap=c(0.319, round(gap_bf,3))), "export/export_bifactor_gap.csv", row.names=FALSE)
 } else cat("\n(#3) bifactor multiple-group did not converge; try technical NCYCLES higher or report single-factor only.\n")
 
-cat("\nWrote export/export_hrs_wave_sensitivity.csv and export/export_bifactor_gap.csv. Send me both.\n")
+cat("\nWrote export/export_hrs_wave_sensitivity.csv and export/export_bifactor_gap.csv.\n")

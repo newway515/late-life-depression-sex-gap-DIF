@@ -2,9 +2,8 @@
 # 01_charls_dif_gap.R  (mirt-only 版, 不依赖 lordif/rms/dmacs)
 # CHARLS 主分析(w4): 测量模型 + 性别 DIF(mirt::DIF) + 效应量(期望分数标准化差)
 #   + 部分不变性 Δ_latent + Δ_adj + H2 bootstrap。
-# 预注册对齐: 实质性 DIF = 显著(adj p<0.01, mirt 内置 BH) 且 效应量超阈(ESSD>=0.20,
-#   即预注册 §5.2 的"期望分数偏差>=量表 SD 的 0.20");H2 单侧 α=0.025;bootstrap>=2000。
-# H1 定向预测(Phase-A, 探索): 性别 DIF 集中于 sleepr + fear。
+# Analysis specification: substantive DIF requires adj p<0.01 (BH) and ESSD>=0.20;
+# the directional test uses one-sided alpha=0.025 and the bootstrap uses >=2000 draws.
 # =====================================================================
 suppressMessages({library(mirt); library(boot); library(dplyr)})
 set.seed(20260709)
@@ -25,7 +24,7 @@ delta_raw <- cohend(d$cesd[d$female==1], d$cesd[d$female==0])
 
 ## ---- 1) 维度检验: 单因子 vs 双因子(躯体 vs 情感) ----
 grm1 <- mirt(X, 1, itemtype="graded", verbose=FALSE)
-soma <- c("effort","sleepr","going")                          # 躯体维(预注册固定)
+soma <- c("effort","sleepr","going")                          # prespecified somatic factor
 spec <- mirt.model(sprintf("affect = %s\n soma = %s",
         paste(which(!(ITEMS %in% soma)), collapse=","),
         paste(which(ITEMS %in% soma), collapse=",")))
