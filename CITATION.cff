@@ -23,6 +23,10 @@ authors:
     given-names: "Yinghong"
     affiliation: "Department of Geriatrics, Tongren People's Hospital, Tongren, Guizhou, China"
 repository-code: "https://github.com/newway515/late-life-depression-sex-gap-DIF"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21366873"
+    description: "Archived software release version 1.0.0"
 license: MIT
 keywords:
   - depression

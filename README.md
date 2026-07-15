@@ -1,5 +1,7 @@
 # Late-life depression sex gap: DIF and robustness analysis
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21366873.svg)](https://doi.org/10.5281/zenodo.21366873)
+
 Versioned analysis code accompanying the manuscript:
 
 > **Is the sex gap in late-life depressive symptoms robust to measurement non-invariance? A cross-cohort differential item functioning and decomposition study in CHARLS, HRS, and ELSA**
@@ -116,5 +118,8 @@ imputed participant-level inputs that cannot be included in this public archive.
 ## Citation and license
 
 Use the repository's `CITATION.cff` or Zenodo citation for the archived software
-version. The code is released under the MIT License. Third-party cohort data remain
-subject to their providers' terms and are not covered by this software license.
+version. The immutable version 1.0.0 archive has DOI
+[`10.5281/zenodo.21366873`](https://doi.org/10.5281/zenodo.21366873); the all-versions
+concept DOI is [`10.5281/zenodo.21366872`](https://doi.org/10.5281/zenodo.21366872).
+The code is released under the MIT License. Third-party cohort data remain subject to
+their providers' terms and are not covered by this software license.
